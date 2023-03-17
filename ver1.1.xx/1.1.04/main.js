@@ -161,4 +161,4 @@ world.events.tick.unsubscribe((tick) => {
     console.info(`license is ${license}`);
     console.info(`command prefix is ${command}`);
 })
-::/
+**/
