@@ -32,6 +32,7 @@ world.events.beforeItemUse.subscribe((useEvent) => {
         mainGui.show(p).then((response) => {
             if (!response.canceled) modalFormAppear(p, response.selection);
         })
+        console.timeStamp("actionFormApper loading")
     };
 
     function modalFormAppear(p, n) {
@@ -63,45 +64,28 @@ world.events.beforeChat.subscribe((chatData) => {
     if (message === `${command}hub`) {
         chatData.cancel = true;
         sender.runCommandAsync(`tp @s 0 3 0`);
-        sender.tell("§l§ahubにtpしましたー!!");
+        sender.sendMessage("§l§ahubにtpしましたー!!");
     };
     if (message === `${command}help`) {
         chatData.cancel = true;
-        sender.tell("§l§b-----help-----");
-        sender.tell("§l§b.hubでhubに戻る");
-        sender.tell("§l§c.tp 準備中")
-        sender.tell("§l§b.tp でテレポート");
-        sender.tell("§l§b使用例");
-        sender.tell("§l§b.tp hub/saikutu/pvp/shop");
-        sender.tell("§l§b.ansi on/off 暗視エフェクト追加/除去")
+        sender.sendMessage("§l§b-----help-----");
+        sender.sendMessage("§l§b.hubでhubに戻る");
+        sender.sendMessage("§l§c.tp 準備中");
+        sender.sendMessage("§l§b.tp でテレポート");
+        sender.sendMessage("§l§b使用例");
+        sender.sendMessage("§l§b.tp hub/saikutu/pvp/shop");
+        sender.sendMessage("§l§b.ansi on/off 暗視エフェクト追加/除去");
+        sender.sendMessage("§l§b.addoninfo addoninfo");
     };
-    /**if (message === `${command}fly on`) {
-        chatData.cancel = true;
-        if (sender.hasTag = "vip") {
-            sender.runCommandAsync(`ability @s mayfly true`);
-            sender.tell("§l§aflyをONにしました!!");
-        }else if (sender.hasTag = "novip") {
-            sender.tell("§l§c権限がありません");
-        };
-    };
-    if (message === `${command}fly off`) {
-        chatData.cancel = true;
-        if (sender.hasTag = "vip") {
-            sender.runCommandAsync(`ability @s mayfly false`);
-            sender.tell("§l§aflyをOFFにしました!!")
-        }else if (sender.hasTag = "novip") {
-            sender.tell("§l§c権限がありません")
-        };
-    };*/
-    if (message === `${command}}ansi on`) {
+    if (message === `${command}ansi on`) {
         chatData.cancel = true;
         sender.addTag("ansi");
-        sender.tell("§l§a暗視on");
+        sender.sendMessage("§l§a暗視on");
     };
     if (message === `${command}ansi off`) {
         chatData.cancel = true;
         sender.removeTag("ansi");
-        sender.tell("§l§a暗視off");
+        sender.sendMessage("§l§a暗視off");
     };
     if (message === `${command}tp hub`) {
         chatData.cancel = true;
@@ -117,22 +101,18 @@ world.events.beforeChat.subscribe((chatData) => {
     };
     if (message === `${command}tp pvp`) {
         chatData.cancel = true;
-        sender.tell("準備中")
+        sender.sendMessage("準備中")
     };
     if (message === `${command}addoninfo`) {
         chatData.cancel = true;
-        sender.tell(`---umbrella server addon---`);
-        sender.tell(`addon version ${addonver}v`);
-        sender.tell(`script version ${scriptver}v`);
-        sender.tell(`license is §l${license}§r`);
-        sender.tell("more script help is GitHub")
-        sender.tell(`${githuburl}`)
+        sender.sendMessage(`---umbrella server addon---`);
+        sender.sendMessage(`addon version ${addonver}v`);
+        sender.sendMessage(`script version ${scriptver}v`);
+        sender.sendMessage(`license is §l${license}§r`);
+        sender.sendMessage("more script help is GitHub")
+        sender.sendMessage(`${githuburl}`)
     }
 });
-/**
-world.events.playerJoin.subscribe((pj) => {
-    pj.player.runCommandAsync(`tp @s 0 3 0`)
-});*/
 world.events.beforeChat.subscribe((chatDatarank) => {
     const { message, sender } = chatDatarank;
 
@@ -145,7 +125,7 @@ world.events.beforeChat.subscribe((chatDatarank) => {
 
     chatDatarank.cancel = true;
 
-    world.say(" [" + rank + "§r] " + sender.name + "§a§l>> §r" + message);
+    world.sendMessage(" [" + rank + "§r] " + sender.name + "§a§l>> §r" + message);
 });
 world.events.itemUse.subscribe(itemkenti => {
     const { item, source } = itemkeiti;
@@ -158,7 +138,6 @@ world.events.itemUse.subscribe(itemkenti => {
         source.addTag(itemName + ':' + item.data);
     }
 });
-
 world.events.itemUseOn.subscribe(itemkenti => {
     const { item, source } = itemkenti;
     const itemID = item.typeId;
@@ -169,17 +148,8 @@ world.events.itemUseOn.subscribe(itemkenti => {
     } else {
         source.addTag(itemName + ':' + item.data);
     }
-})
-/**
-world.events.beforeItemUse.subscribe((ikatu3) => {
-    if (ikatu3.source.typeId != "minecraft:player") return;
-    if (ikatu3.item.typeId == "bridge:ikatu3") {
-        const { nameTag } = ikatu3.source.nameTag
-        ikatu3.source.nameTag.
-    }
-})
-*/
-world.events.tick.subscribe((tick) => {
+});
+world.events.tick.unsubscribe((tick) => {
     const scriptver = config.addon.ver.scriptver;
     const addonver = config.addon.ver.addonver;
     const license = config.addon.license;
