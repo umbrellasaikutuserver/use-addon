@@ -56,6 +56,10 @@ world.events.beforeItemUse.subscribe((useEvent) => {
 world.events.beforeChat.subscribe((chatData) => {
     const { sender, message } = chatData;
     const command = config.command.prefix;
+    const scriptver = config.addon.ver.scriptver;
+    const addonver = config.addon.ver.addonver;
+    const githuburl = config.addon.githuburl;
+    const license = config.addon.license;
     if (message === `${command}hub`) {
         chatData.cancel = true;
         sender.runCommandAsync(`tp @s 0 3 0`);
@@ -114,6 +118,15 @@ world.events.beforeChat.subscribe((chatData) => {
     if (message === `${command}tp pvp`) {
         chatData.cancel = true;
         sender.tell("準備中")
+    };
+    if (message === `${command}addoninfo`) {
+        chatData.cancel = true;
+        sender.tell(`---umbrella server addon---`);
+        sender.tell(`addon version ${addonver}v`);
+        sender.tell(`script version ${scriptver}v`);
+        sender.tell(`license is §l${license}§r`);
+        sender.tell("more script help is GitHub")
+        sender.tell(`${githuburl}`)
     }
 });
 /**
@@ -166,3 +179,14 @@ world.events.beforeItemUse.subscribe((ikatu3) => {
     }
 })
 */
+world.events.tick.subscribe((tick) => {
+    const scriptver = config.addon.ver.scriptver;
+    const addonver = config.addon.ver.addonver;
+    const license = config.addon.license;
+    const command = config.command.prefix;
+    console.timeStamp("loading umbrella script addon");
+    console.info(`script version ${scriptver}v`);
+    console.info(`addon version ${addonver}v`);
+    console.info(`license is ${license}`);
+    console.info(`command prefix is ${command}`);
+})
