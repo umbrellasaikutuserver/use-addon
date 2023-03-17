@@ -9,4 +9,12 @@ export default
         command: {
             prefix: '.'
         },
-    }
+    addon: {
+            githuburl: 'https://github.com/umbrellasaikutuserver/use-addon',
+            license: 'Apache License 2.0',
+            ver: {
+                scriptver: '1.1.4',
+                addonver: '1.0.5',
+            },
+        },
+    },
