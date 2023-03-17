@@ -149,6 +149,7 @@ world.events.itemUseOn.subscribe(itemkenti => {
         source.addTag(itemName + ':' + item.data);
     }
 });
+/**
 world.events.tick.unsubscribe((tick) => {
     const scriptver = config.addon.ver.scriptver;
     const addonver = config.addon.ver.addonver;
@@ -160,3 +161,4 @@ world.events.tick.unsubscribe((tick) => {
     console.info(`license is ${license}`);
     console.info(`command prefix is ${command}`);
 })
+::/
