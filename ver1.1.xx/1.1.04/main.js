@@ -127,7 +127,7 @@ world.events.beforeChat.subscribe((chatDatarank) => {
 
     world.sendMessage(" [" + rank + "§r] " + sender.name + "§a§l>> §r" + message);
 });
-world.events.itemUse.subscribe(itemkenti => {
+/**world.events.itemUse.subscribe(itemkenti => {
     const { item, source } = itemkeiti;
     const itemID = item.typeId;
     const itemName = itemID.substring(itemID.indexOf(':') + 1);
@@ -149,7 +149,6 @@ world.events.itemUseOn.subscribe(itemkenti => {
         source.addTag(itemName + ':' + item.data);
     }
 });
-/**
 world.events.tick.unsubscribe((tick) => {
     const scriptver = config.addon.ver.scriptver;
     const addonver = config.addon.ver.addonver;
