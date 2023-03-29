@@ -12,7 +12,7 @@ world.events.beforeItemUse.subscribe((useEvent) => {
 
     function actionFormAppear2(p) {
         const mainGui = new ActionFormData()
-            .title(`運営のみ`)
+            .title(`teleport`)
     }
 
     function actionFormAppear(p) {
@@ -25,7 +25,7 @@ world.events.beforeItemUse.subscribe((useEvent) => {
             .button(`HUB`, hub)
             .button(`採掘場`, saikutu)
             .button(`ショップ`, shop)
-            .button(`PVP(採掘量500から)`, pvp)
+            .button(`PVP \n (採掘量500から)`, pvp)
             .button(`coming soon`, 'textures/items/')
             .button(`coming soon`, 'textures/items/')
             .button(`coming soon`, 'textures/items/');
@@ -111,7 +111,7 @@ world.events.beforeChat.subscribe((chatData) => {
         sender.sendMessage(`license is §l${license}§r`);
         sender.sendMessage("more script help is GitHub")
         sender.sendMessage(`${githuburl}`)
-    }
+    };
 });
 world.events.beforeChat.subscribe((chatDatarank) => {
     const { message, sender } = chatDatarank;
