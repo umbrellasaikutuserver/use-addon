@@ -139,16 +139,27 @@ world.events.beforeChat.subscribe((chatData) => {
         sender.sendMessage(`license is §l${license}§r`);
         sender.sendMessage("more script help is GitHub");
         sender.sendMessage(`${githuburl}`);
-    }
-    if(message === `${command}time`) {
+    }else if(message === `${command}time`) {
         chatData.cancel = true;
         var date = new Date();
         const getHours = date.getHours();
         const getMinutes = date.getMinutes();
         const getSeconds = date.getSeconds();
         sender.sendMessage(`今の時間は${getHours}:${getMinutes}:${getSeconds}です!!`);
-    };
-    if(message ==`${command}code ${config.code}`) {
+    }else{
+        var date = new Date();
+        const getHours = date.getHours();
+        const getMinutes = date.getMinutes();
+        const getSeconds = date.getSeconds();
+        let rank = sender;
+        sender.getTags();
+        sender.find((tag) => tag.startsWith("rank:"));
+        ?.split(":")[1];
+        if (!rank) return;
+        chatDatarank.cancel = true;
+        world.runCommandAsync(`telleaw @a {"rawtext":[{"text":"[${rank}§r] ${sender.name} §a>>§r${message} §r§f[${getHours}:${getMinutes}:${getSeconds}]"}]}`);
+        }
+/**    }else if(message ==`${command}code ${config.code}`) {
         chatData.cancel= true
         if(!sender.hasTag === "codeget") {
             sender.runCommandAsync(`scoreboard players add @s coin ${config.codegift}`);
@@ -156,21 +167,9 @@ world.events.beforeChat.subscribe((chatData) => {
             sender.addTag("codeget");
         }else if(sender.hasTag === "codeget") {
             sender.sendMessage("すでにギフトをもらっています");
-        }else{
-            var date = new Date();
-            const getHours = date.getHours();
-            const getMinutes = date.getMinutes();
-            const getSeconds = date.getSeconds();
-            let rank = sender;
-            sender.getTags();
-            sender.find((tag) => tag.startsWith("rank:"));
-            ?.split(":")[1];
-            if (!rank) return;
-            chatDatarank.cancel = true;
-            world.runCommandAsync(`telleaw @a {"rawtext":[{"text":"[${rank}§r] ${sender.name} §a>>§r${message} §r§f[${getHours}:${getMinutes}:${getSeconds}]"}]}`);
         }
     }
-});
+});**/
 /**
     world.events.beforeChat.subscribe((chatDatarank) => {
     const { message, sender } = chatDatarank;
