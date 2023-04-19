@@ -6,7 +6,8 @@ import config from './config.js'
 //ActionFormData
 world.events.beforeItemUse.subscribe((useEvent) => {
     const item = useEvent.item
-    if (item.typeId=== "bridge:tpitem") {
+    if (item.typeId === "minecraft:compass") {
+        //臨時でコンパス
         actionFormAppear(useEvent.source);
     }
 
@@ -94,12 +95,12 @@ world.events.beforeChat.subscribe((chatData) => {
     const addonver = config.addon.ver.addonver;
     const githuburl = config.addon.githuburl;
     const license = config.addon.license;
+    chatData.cancel = true;
     if (message === `${command}hub`) {
         chatData.cancel = true;
         sender.runCommandAsync(`tp @s 0 3 0`);
         sender.sendMessage("§l§ahubにtpしましたー!!");
-    }
-    if (message === `${command}help`) {
+    }else if (message === `${command}help`) {
         chatData.cancel = true;
         sender.sendMessage("§l§b-----help-----");
         sender.sendMessage("§l§b.hubでhubに戻る");
@@ -110,34 +111,27 @@ world.events.beforeChat.subscribe((chatData) => {
         sender.sendMessage("§l§b.ansi on/off 暗視エフェクト追加/除去");
         sender.sendMessage("§l§b.addoninfo addoninfo");
         sender.sendMessage("§l§b.time");
-    }
-    if (message === `${command}ansi on`) {
+    }else if (message === `${command}ansi on`) {
         chatData.cancel = true;
         sender.addTag("ansi");
         sender.sendMessage("§l§a暗視on");
-    }
-    if (message === `${command}ansi off`) {
+    }else if (message === `${command}ansi off`) {
         chatData.cancel = true;
         sender.removeTag("ansi");
         sender.sendMessage("§l§a暗視off");
-    }
-    if (message === `${command}tp hub`) {
+    }else if (message === `${command}tp hub`) {
         chatData.cancel = true;
         sender.runCommandAsync(`tp 0 1 0`);
-    }
-    if (message === `${command}tp saikutu`) {
+    }else if (message === `${command}tp saikutu`) {
         chatData.cancel = true;
         sender.runCommandAsync(`tp 0 -1 24`);
-    }
-    if (message === `${command}tp shop `) {
+    }else if (message === `${command}tp shop `) {
         chatData.cancel = true;
         sender.runCommandAsync(`tp 0 -19 0`);
-    }
-    if (message === `${command}tp pvp`) {
+    }else if (message === `${command}tp pvp`) {
         chatData.cancel = true;
         sender.sendMessage("準備中");
-    }
-    if (message === `${command}addoninfo`) {
+    }else if (message === `${command}addoninfo`) {
         chatData.cancel = true;
         sender.sendMessage(`---umbrella server addon---`);
         sender.sendMessage(`addon version ${addonver}v`);
@@ -162,11 +156,23 @@ world.events.beforeChat.subscribe((chatData) => {
             sender.addTag("codeget");
         }else if(sender.hasTag === "codeget") {
             sender.sendMessage("すでにギフトをもらっています");
+        }else{
+            var date = new Date();
+            const getHours = date.getHours();
+            const getMinutes = date.getMinutes();
+            const getSeconds = date.getSeconds();
+            let rank = sender;
+            sender.getTags();
+            sender.find((tag) => tag.startsWith("rank:"));
+            ?.split(":")[1];
+            if (!rank) return;
+            chatDatarank.cancel = true;
+            world.runCommandAsync(`telleaw @a {"rawtext":[{"text":"[${rank}§r] ${sender.name} §a>>§r${message} §r§f[${getHours}:${getMinutes}:${getSeconds}]"}]}`);
         }
     }
 });
 /**
-   world.events.beforeChat.subscribe((chatDatarank) => {
+    world.events.beforeChat.subscribe((chatDatarank) => {
     const { message, sender } = chatDatarank;
     var date = new Date();
     const getHours = date.getHours();
@@ -181,9 +187,9 @@ world.events.beforeChat.subscribe((chatData) => {
 
     chatDatarank.cancel = true;
     world.runCommandAsync(`telleaw @a {"rawtext":[{"text":"[${rank}§r] ${sender.name} §a>>§r${message} §r§f[${getHours}:${getMinutes}:${getSeconds}]"}]}`);
-}
-    });
-world.events.itemUse.subscribe(itemkenti => {
+    }
+});**/
+/**world.events.itemUse.subscribe(itemkenti => {
     const { item, source } = itemkeiti;
     const itemID = item.typeId;
     const itemName = itemID.substring(itemID.indexOf(':') + 1);
@@ -193,8 +199,8 @@ world.events.itemUse.subscribe(itemkenti => {
     } else {
         source.addTag(itemName + ':' + item.data);
     }
-});
-world.events.itemUseOn.subscribe(itemkenti => {
+}); **/
+/**world.events.itemUseOn.subscribe(itemkenti => {
     const { item, source } = itemkenti;
     const itemID = item.typeId;
     const itemName = itemID.substring(itemID.indexOf(':') + 1);
@@ -204,8 +210,8 @@ world.events.itemUseOn.subscribe(itemkenti => {
     } else {
         source.addTag(itemName + ':' + item.data);
     }
-});
-world.events.tick.unsubscribe((tick) => {
+});**/
+/**world.events.tick.unsubscribe((tick) => {
     const scriptver = config.addon.ver.scriptver;
     const addonver = config.addon.ver.addonver;
     const license = config.addon.license;
@@ -215,5 +221,4 @@ world.events.tick.unsubscribe((tick) => {
     console.info(`addon version ${addonver}v`);
     console.info(`license is ${license}`);
     console.info(`command prefix is ${command}`);
-})
-**/
+})**/
